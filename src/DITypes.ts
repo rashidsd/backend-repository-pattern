@@ -1,5 +1,7 @@
 const DITypes = {
-IUser: Symbol.for("IUser")
+IUser: Symbol.for("IUser"),
+IRole:Symbol.for("IRole"),
+IRoleGroup: Symbol.for("IRoleGroup")
 
 }
 

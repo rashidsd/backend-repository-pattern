@@ -1,6 +1,8 @@
 import 'dotenv/config'
 import express,{Request,Response} from 'express'
 import userRouter from './Routes/userRoutes'
+import roleRouter from './Routes/roleRoutes'
+
 const baseURL = process.env.BASE_URL
 
 const app = express()
@@ -9,6 +11,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 
 app.use(`${baseURL}/user`,userRouter)
+app.use(`${baseURL}/role`,roleRouter)
 
 
 app.listen(process.env.PORT,()=>{

@@ -1,10 +1,16 @@
 export type eUser = {
-    UserID:number,
-    UserName:string,
+   UserName:string,
     ERPID:string,
     EMail:string,
     HashPassword:string,
     Token:string,
     RefreshToken:string
 }
+
+export type eRole ={
+    GroupID:number
+    RoleName:string
+}
+
+
 

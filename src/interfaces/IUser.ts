@@ -8,6 +8,7 @@ interface IUser {
     delete(id:Number):Promise<boolean>
     findByID(id:Number):Promise<User | null>
     All(): Promise<User[]>
+    UserbyQry(obj:any):Promise<User[] | null>
 }
 
 export default IUser

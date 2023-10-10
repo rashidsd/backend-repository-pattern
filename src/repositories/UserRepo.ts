@@ -3,7 +3,7 @@ import { eUser } from "../Entities/entities";
 import IUser from "../interfaces/IUser";
 import { injectable } from "inversify";
 import 'reflect-metadata'
-import { promises } from "dns";
+
 
 @injectable()
 class UserRepo implements IUser {
@@ -39,6 +39,10 @@ class UserRepo implements IUser {
     
     async All(): Promise<User[]> {
        return await User.findAll()
+    }
+
+    async UserbyQry(obj:any):Promise<User[] | null> {
+        return await User.findAll({...obj})
     }
 
 }
