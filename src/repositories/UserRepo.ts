@@ -7,6 +7,10 @@ import 'reflect-metadata'
 
 @injectable()
 class UserRepo implements IUser {
+   
+    async findByMail(email: string): Promise<User | null> {
+       return await  User.findOne({where:{EMail:email}})
+    }
 
     async create(user: eUser): Promise<User>  {
     const createdUser = await User.create(user)
@@ -37,7 +41,7 @@ class UserRepo implements IUser {
        return await User.findOne({where: {UserID:id}})
     }
     
-    async All(): Promise<User[]> {
+    async all(): Promise<User[]> {
        return await User.findAll()
     }
 

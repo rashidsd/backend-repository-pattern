@@ -1,13 +1,11 @@
 import { Request, Response } from "express";
 import { userService } from "../DIcontainer";
 import bcrypt from "bcrypt";
-import User from "../Models/User";
+
 
 const creatUser = async (req: Request, res: Response) => {
   try {
-    const isUserExists = await User.findOne({
-      where: { Email: req.body.EMail },
-    });
+    const isUserExists = await userService.findByMail(req.body.EMail );
     if (isUserExists) {
       return res.send({
         status: false,
@@ -36,7 +34,7 @@ const creatUser = async (req: Request, res: Response) => {
 
 const AllUsers = async (req: Request, res: Response) => {
   try {
-    const allUser = await userService.All();
+    const allUser = await userService.all();
     if (allUser) {
       return res.send({ status: true, msg: "OK", data: allUser });
     } else {

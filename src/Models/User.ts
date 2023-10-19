@@ -22,9 +22,7 @@ User.init(
     HashPassword: {
       type: DataTypes.STRING,
       allowNull: false
-    },
-    Token: DataTypes.STRING,
-    RefreshToken: DataTypes.STRING,
+    }
   },
   {
     sequelize: db,

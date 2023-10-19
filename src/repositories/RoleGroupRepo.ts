@@ -21,7 +21,7 @@ class RoleGroupRepo implements IRoleGroup {
        return RoleGroup.destroy({where:{GroupID:id}})
     }
 
-    async All(): Promise<RoleGroup[]> {
+    async all(): Promise<RoleGroup[]> {
        return RoleGroup.findAll()
     }
 
@@ -29,10 +29,6 @@ class RoleGroupRepo implements IRoleGroup {
         return RoleGroup.findByPk(Number(id))
     }
 
-    RoleGroupByQry(obj: any): Promise<RoleGroup[] | null> {
-        return RoleGroup.findAll({...obj})
-    }
-
-}
+   }
 
 export default RoleGroupRepo

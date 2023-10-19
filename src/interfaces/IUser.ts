@@ -7,8 +7,8 @@ interface IUser {
     update(id: Number,ERPID:string,userName:string):Promise<User | null>
     delete(id:Number):Promise<boolean>
     findByID(id:Number):Promise<User | null>
-    All(): Promise<User[]>
-    UserbyQry(obj:any):Promise<User[] | null>
-}
+    findByMail(email:string):Promise<User | null>
+    all(): Promise<User[]>
+   }
 
 export default IUser

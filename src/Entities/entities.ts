@@ -12,5 +12,15 @@ export type eRole ={
     RoleName:string
 }
 
+export type eUserRole = {
+    UserID:string,
+    RoleID:string
+}
+
+export type loginUser = {
+    email:string,
+    password:string
+}
+
 
 

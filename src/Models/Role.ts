@@ -1,5 +1,8 @@
 import { Model, DataTypes } from "sequelize";
+import RoleGroup from "./RoleGroup";
+import User from "./User";
 import db from "../db.config";
+import UserRoles from "./UserRoles";
 
 class Role extends Model {}
 
@@ -27,6 +30,14 @@ Role.init({
     updatedAt: false 
  }
 );
+
+RoleGroup.hasMany(Role,{foreignKey:"GroupID"});
+Role.belongsTo(RoleGroup,{foreignKey:"GroupID"})
+
+User.belongsToMany(Role,{through:UserRoles,foreignKey:"UserID"})
+Role.belongsToMany(User,{through:UserRoles,foreignKey:"RoleID"})
+
+
 
 
 export default Role
