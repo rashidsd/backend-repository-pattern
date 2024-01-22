@@ -5,14 +5,20 @@ import IRole from "../interfaces/IRole";
 import UserRoles from "../Models/UserRoles";
 import { injectable } from "inversify";
 import "reflect-metadata"
-import db from "../db.config";
-import { QueryTypes } from "sequelize";
+import Utility from "../utilites/dbUtility";
 
 
 
 @injectable()
 class RoleRepo implements IRole {
+
+  async nextID(): Promise<string> {
+    const result:any  =await Utility.exeQuery("Select Format(ISNULL(Max(Convert(float,RoleID)),0)+1,'000')RoleID from Dashboard_Roles")
+    return result[0].RoleID
+}
+
   async create(role: eRole): Promise<Role> {
+    role.RoleID =  await this.nextID()
     return await Role.create(role);
   }
 
@@ -43,21 +49,30 @@ class RoleRepo implements IRole {
     return await Role.findAll();
   }
 
-  async roleByGroup(): Promise<Role[]> {
-    return await Role.findAll({
-      include: { model: RoleGroup, attributes: ["GroupName"] },
-    });
+
+
+  async roleByGroup(): Promise<any[]> {
+      return await Utility.exeQuery("select RoleID,RoleName,g.GroupName from Dashboard_Roles r Left join Dashboard_RolesGroup g on r.GroupID= g.GroupID Order by g.GroupName ")
   }
+
   async roleByUserId(userId: number): Promise<any[]> {
-    const result = await db.query(
-      "Select r.GroupID,GroupName,ur.RoleID,RoleName from Dashboard_Users u Left join Dashboard_UserRoles ur on u.UserID = ur.UserID left join Dashboard_Roles r on ur.RoleID = r.RoleID left join Dashboard_RolesGroup rg on r.GroupID=rg.GroupID Where u.UserID=:UserID",
-      {
-        replacements: { UserID: userId },
-        type: QueryTypes.SELECT,
-      }
+    const result = await Utility.exeQuery(
+      "Select GroupID,GroupName,RoleID,RoleName From Dashboard_VUserRoles Where Assign=:Assign AND UserID=:UserID",
+      { UserID: userId,Assign:1 }
     );
     return result;
   }
+
+  async roleByEMail(email: string): Promise<any[]> {
+    const result = await Utility.exeQuery(
+      "Select GroupID,GroupName,RoleID,RoleName From Dashboard_VUserRoles Where Assign=:Assign AND EMail=:EMail",
+      { EMail: email,Assign:1 }
+    );
+    return result;
+  }
+
+
+
   async roleByGroupId(groupId: number): Promise<Role[]> {
     return await Role.findAll({
       include: { model: RoleGroup, attributes: ["GroupName"] },
@@ -66,13 +81,12 @@ class RoleRepo implements IRole {
   }
 
   async isRoleAssigned(roleId: number): Promise<boolean> {
-    const role = await UserRoles.findAll({
+    const role = await UserRoles.findOne({
       where: { RoleID: roleId },
     });
     if (role) return true;
     else return false;
   }
-
     
 }
 

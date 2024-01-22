@@ -6,15 +6,19 @@ class RoleGroup extends Model {}
 
 RoleGroup.init({
     GroupID: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       primaryKey: true,
-      autoIncrement:true
-    },
+     },
     GroupName: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
+    SrNo:{
+      type:DataTypes.NUMBER,
+      allowNull:true,
+      unique:true
+    }
   },
   {
     sequelize:db, 

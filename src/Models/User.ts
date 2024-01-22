@@ -7,8 +7,7 @@ class User extends Model {}
 User.init(
   {
     UserID: {
-      type: DataTypes.NUMBER,
-      autoIncrement: true,
+      type: DataTypes.STRING,
       primaryKey: true,
     },
     UserName: DataTypes.STRING,
@@ -22,7 +21,10 @@ User.init(
     HashPassword: {
       type: DataTypes.STRING,
       allowNull: false
-    }
+    },
+    CustId:{
+      type:DataTypes.STRING,allowNull:true    }
+
   },
   {
     sequelize: db,

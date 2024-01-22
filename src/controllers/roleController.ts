@@ -3,7 +3,8 @@ import { roleService } from "../DIcontainer";
 
 const createRole = async (req: Request, res: Response) => {
   try {
-    const newRole = await roleService.create(req.body);
+     const newRole = await roleService.create(req.body);
+   
     if (newRole) {
       return res.send({
         status: true,
@@ -35,7 +36,7 @@ const updateRole = async (req: Request, res: Response) => {
 
 const deleteRole = async (req: Request, res: Response) => {
   try {
-    const isAssigned = await roleService.isRoleAssigned(Number(req.params.id))
+    const isAssigned:boolean = await roleService.isRoleAssigned(Number(req.params.id))
      
     if (isAssigned) {
       return res.send({
@@ -100,18 +101,18 @@ const roleByGroupId = async(req:Request,res:Response)=> {
 }
 
 
-const roleByUserId = async(req:Request,res:Response)=> {
+const roleByUserId = async (req: Request, res: Response) => {
   try {
-    const roles = await roleService.roleByUserId(Number(req.params.id))
-  if (roles) 
-        return res.send({ status: true, msg: "Ok", data: roles });
-  else
-    return res.send({ status: false, msg: "no role found", data: roles });
+    const roles = await roleService.roleByUserId(Number(req.params.id));
+    if (roles) return res.send({ status: true, msg: "Ok", data: roles });
+    else return res.send({ status: false, msg: "no role found", data: roles });
   } catch (error) {
     return res.send({ status: false, msg: error });
   }
+};
 
-}
+
+
 
 
 export default {
@@ -123,4 +124,5 @@ export default {
   roleByGroup,
   roleByGroupId,
   roleByUserId,
+  
 };

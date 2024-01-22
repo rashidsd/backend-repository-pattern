@@ -1,0 +1,23 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const inversify_1 = require("inversify");
+const userRepo_1 = __importDefault(require("./repositories/userRepo"));
+const DITypes_1 = __importDefault(require("./DITypes"));
+const roleRepo_1 = __importDefault(require("./repositories/roleRepo"));
+const roleGroupRepo_1 = __importDefault(require("./repositories/roleGroupRepo"));
+const userRolesRepo_1 = __importDefault(require("./repositories/userRolesRepo"));
+const authRepo_1 = __importDefault(require("./repositories/authRepo"));
+const dashboardRepo_1 = __importDefault(require("./repositories/dashboardRepo"));
+const utilityRepo_1 = __importDefault(require("./repositories/utilityRepo"));
+const DIcontainer = new inversify_1.Container();
+DIcontainer.bind(DITypes_1.default.IUser).to(userRepo_1.default);
+DIcontainer.bind(DITypes_1.default.IRole).to(roleRepo_1.default);
+DIcontainer.bind(DITypes_1.default.IRoleGroup).to(roleGroupRepo_1.default);
+DIcontainer.bind(DITypes_1.default.IUserRoles).to(userRolesRepo_1.default);
+DIcontainer.bind(DITypes_1.default.IAuth).to(authRepo_1.default);
+DIcontainer.bind(DITypes_1.default.IDashboard).to(dashboardRepo_1.default);
+DIcontainer.bind(DITypes_1.default.IUtility).to(utilityRepo_1.default);
+exports.default = DIcontainer;

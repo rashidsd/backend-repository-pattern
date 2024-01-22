@@ -27,7 +27,8 @@ UserRoles.init({
           model:Role,
           key:"RoleID"
         }
-      }
+      },
+      
   },
   {
     sequelize:db, 

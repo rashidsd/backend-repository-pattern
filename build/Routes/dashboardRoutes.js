@@ -1,0 +1,21 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const dashboardController_1 = __importDefault(require("../controllers/dashboardController"));
+const express_1 = __importDefault(require("express"));
+const routesProtection_1 = __importDefault(require("../middleWares/routesProtection"));
+const router = express_1.default.Router();
+router.get("/hrDashboard/:unitId/:empCategory/:dated", (0, routesProtection_1.default)('Hr Dashboard'), dashboardController_1.default.hrDashboard);
+router.get("/hrDashboard/hrDashboardDetail/:heading/:tag/:unitId/:empCategory/:dated", (0, routesProtection_1.default)('Hr Dashboard'), dashboardController_1.default.hrDashboardDetail);
+router.get("/productionDashboard/:unitId/:orderCategory", (0, routesProtection_1.default)('Production Dashboard'), dashboardController_1.default.productionDashboard);
+router.get("/productionDashboard/productionDashboardDetail/:heading/:tag/:unitId/:orderCategory", (0, routesProtection_1.default)('Production Dashboard'), dashboardController_1.default.productionDashboardDetail);
+router.get("/stockDashboard/:store/:fromDate/:toDate", (0, routesProtection_1.default)('Stock Dashboard'), dashboardController_1.default.stockDashboard);
+router.get("/stockDashboard/stockDashboardDetail/monthWiseReceiving/:heading/:tag/:store/:fromDate/:toDate", (0, routesProtection_1.default)('Stock Dashboard'), dashboardController_1.default.stockReceivingMontWise);
+router.get("/stockDashboard/stockDashboardDetail/:heading/:tag/:store/:fromDate/:toDate", (0, routesProtection_1.default)('Stock Dashboard'), dashboardController_1.default.stockDashboardDetail);
+router.get("/accountDashboard/:dated", (0, routesProtection_1.default)('Accounts Dashboard'), dashboardController_1.default.accountDashboard);
+router.get("/accountDashboard/accountDashboardDetail/:heading/:tag/:dated", (0, routesProtection_1.default)('Accounts Dashboard'), dashboardController_1.default.accountDashboardDetail);
+router.get("/exportDashboard/:unitId", (0, routesProtection_1.default)('Export Dashboard'), dashboardController_1.default.exportDashboard);
+router.get("/exportDashboard/exportDashboardDetail/:heading/:tag/:unitId", (0, routesProtection_1.default)('Export Dashboard'), dashboardController_1.default.exportDashboardDetail);
+exports.default = router;

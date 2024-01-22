@@ -3,8 +3,9 @@ import { roleGroupService } from "../DIcontainer";
 
 const createRoleGroup = async (req: Request, res: Response) => {
   try {
+   
+    const roleGroup = await roleGroupService.create(req.body);
     
-    const roleGroup = await roleGroupService.create(req.body.GroupName);
     if (roleGroup)
       return res.send({
         status: true,
@@ -34,7 +35,7 @@ const deletRoleGroup = async (req: Request, res: Response) => {
 
   const updateRoleGroup = async (req: Request, res: Response) => {
     try {
-      const updated = await roleGroupService.update(Number(req.params.id),req.body.GroupName);
+      const updated = await roleGroupService.update(Number(req.params.id),req.body.GroupName,Number(req.body.SrNo));
       if (updated)
         return res.send({
           status: true,

@@ -22,4 +22,5 @@ router.route('/userRole/:id([0-9]+)')
 .get(roleController.roleByUserId)
 
 
+
 export default router

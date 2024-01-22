@@ -1,0 +1,22 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.utilityService = exports.dashboardService = exports.authService = exports.userRoleService = exports.roleGroupService = exports.roleService = exports.userService = void 0;
+const inversify_config_1 = __importDefault(require("./inversify.config"));
+const DITypes_1 = __importDefault(require("./DITypes"));
+const userService = inversify_config_1.default.get(DITypes_1.default.IUser);
+exports.userService = userService;
+const roleService = inversify_config_1.default.get(DITypes_1.default.IRole);
+exports.roleService = roleService;
+const roleGroupService = inversify_config_1.default.get(DITypes_1.default.IRoleGroup);
+exports.roleGroupService = roleGroupService;
+const userRoleService = inversify_config_1.default.get(DITypes_1.default.IUserRoles);
+exports.userRoleService = userRoleService;
+const authService = inversify_config_1.default.get(DITypes_1.default.IAuth);
+exports.authService = authService;
+const dashboardService = inversify_config_1.default.get(DITypes_1.default.IDashboard);
+exports.dashboardService = dashboardService;
+const utilityService = inversify_config_1.default.get(DITypes_1.default.IUtility);
+exports.utilityService = utilityService;

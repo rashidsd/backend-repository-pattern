@@ -8,9 +8,9 @@ class Role extends Model {}
 
 Role.init({
     RoleID: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       primaryKey: true,
-      autoIncrement:true
+     
       },
     GroupID: {
       type:DataTypes.INTEGER,

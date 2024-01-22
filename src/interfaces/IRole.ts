@@ -2,6 +2,7 @@ import { eRole } from "../Entities/entities";
 import Role from "../Models/Role";
 
 interface IRole {
+  nextID():Promise<string>
   create(role: eRole): Promise<Role>;
   update(id: Number, roleName: string): Promise<[affectedRows: number]>;
   delete(id: Number): Promise<boolean>;
@@ -9,8 +10,10 @@ interface IRole {
   findById(id: number): Promise<Role | null>;
   roleByGroup(): Promise<Role[]>;
   roleByUserId(userId: number): Promise<Role[]>;
+  roleByEMail(email: string): Promise<Role[]>;
   roleByGroupId(groupId: number): Promise<Role[]>;
   isRoleAssigned(roleId: number): Promise<boolean>;
+ 
 }
 
 export default IRole;

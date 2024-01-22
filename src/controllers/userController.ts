@@ -9,7 +9,6 @@ const creatUser = async (req: Request, res: Response) => {
     if (isUserExists) {
       return res.send({
         status: false,
-        statusCode: 200,
         msg: `${req.body.EMail} already exists `,
       });
     }
@@ -64,7 +63,8 @@ const updatUser = async (req: Request, res: Response) => {
     const user = await userService.update(
       Number(req.params.id),
       req.body.ERPID,
-      req.body.UserName
+      req.body.UserName,
+      req.body.CustId
     );
     if (user)
       return res.send({
@@ -93,4 +93,39 @@ const deleteUser = async (req: Request, res: Response) => {
   }
 };
 
-export default { creatUser, AllUsers, findById, updatUser, deleteUser };
+const plainUser =async (req:Request,res:Response) => {
+  try {
+    const response =  await userService.plainUser();
+    if (response) {
+      return res.send({ status: true, msg: "ok",data:response });
+    }else {
+      return res.send({ status: false, msg: "no user exists" });
+    }
+  } catch (err) {
+    return res.send({ status: false, msg: err });
+  }
+}
+
+ const  changePassword = async(req:Request,res:Response)=> {
+  try {
+    const changed =  await userService.changePassword(req.body);
+      if (changed) {
+        return res.send({ status: true, msg: "password changed successfully!" });
+      }else {
+        return res.send({ status: false, msg: "invalid email or passsword" });
+      }
+  } catch (error) {
+    return res.send({ status: false, msg: error });
+  }
+
+ }
+
+export default { 
+  creatUser, 
+  AllUsers, 
+  findById, 
+  updatUser, 
+  deleteUser,
+  plainUser,
+  changePassword,
+ }
